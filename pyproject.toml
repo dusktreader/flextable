@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "flextable"
+version = "0.1.0"
+description = "Add dynamic attributes to a postgres table"
+authors = ["Tucker Beck <tucker.beck@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask-sqlalchemy = "^2.3"
+flask-buzz = "^0.1.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.3"
+psycopg2-binary = "^2.7"
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
+pre-commit = "^1.14"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
