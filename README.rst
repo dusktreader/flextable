@@ -14,18 +14,16 @@ Dependencies
 ------------
 
 * python3
-* pipenv
+* poetry
+* postgres
 
 Setup
 -----
 
-NOTE
-....
-
-The project uses `pipenv <https://docs.pipenv.org>` to install the application
-and to manage dependencies. Pipenv also creates/activates a virtual environment
-for the application so the user need not concern themselves with managing
-virtual environments
+The project uses `poetry <https://poetry.eustace.io/>`_ to install the
+application and to manage dependencies. Poetry also creates/activates a virtual
+environment for the application so the user need not concern themselves with
+managing virtual environments
 
 Install the flextable package for development
 .......................................
@@ -33,9 +31,7 @@ Install the flextable package for development
 In order to install the flextable package for development and to include all
 its dependencies, execute this command::
 
-$ pipenv install --dev
-
-The full list of dependencies can be found in ``Pipfile``
+$ poetry install --dev
 
 Running tests
 =============
@@ -44,48 +40,32 @@ Using a local testing database
 ..............................
 
 TODO
+In order to run the tests, you will need a test database set up. This can
+be on your local machine or on a remote system you can access.
 
-Using a specific testing database
-.................................
+By default the URI for the test database is::
+
+   postgresql+psycopg2://postgres@localhost:5432/flextable_test
+
+If you wish to override this and target a different database, you simply need
+to set TEST_DATABASE_URI in your environment
 
 Invokation
 ----------
 
 This project uses `pytest <http://doc.pytest.org/en/latest/>`_
 
-Tests can be executed by invoking the ``tests`` helper script::
+Tests can be executed like so::
 
-$ pipenv run tests
+$ poetry run pytest tests
 
-This command will run all the tests in random order and stop on the first
-failure. There are also additional test helpers::
+Code Formatting
+===============
 
-  $ pipenv run tests-verbose
-  same as tests, but produce verbose output
+Code formatting is enforced by `black <https://github.com/ambv/blacka>`_ with
+a git pre-commit hook.
 
-  $ pipenv run tests-all
-  do not stop on test failures
+If you wish to run the black style-checker and code-formatter directly, you
+can invoke it as::
 
-  $ pipenv run tests-coverage
-  run all the tests, and produce a test coverage report (slower)
-
-  $ pipenv run tests-watch
-  see below
-
-  $ pipenv run test <test_target>
-  see below
-
-Using pytest-testmon and pytest-watch
--------------------------------------
-
-You can use the pytest-testmon and pytest-watch extensions to have pytest
-watch for changes in your source and tests and run only the impacted tests
-when the changes occur. This can be useful for having your tests being watched
-in another terminal while you hack on a test or a module with existing tests.
-Both of these extensions should install with the 'dev' optional dependencies.
-to run a watcher, use the ``tests-watch`` helper script::
-
-$ pipenv run tests-watch
-
-See `pytest-testmon's github <https://github.com/tarpas/pytest-testmon>`_ for
-more information
+$ poetry run black flextable

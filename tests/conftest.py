@@ -13,7 +13,7 @@ def app():
     app = flask.Flask(__name__)
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-        "TEST_DATABASE_URL",
+        "TEST_DATABASE_URI",
         "postgresql+psycopg2://postgres@localhost:5432/flextable_test",
     )
     return app
